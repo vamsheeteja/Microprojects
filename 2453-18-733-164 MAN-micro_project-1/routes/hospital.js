@@ -21,9 +21,9 @@ router.get('/', middleware.checkToken, async(req, res) => {
 })
 
 // get data by using id
-router.get('/:id', async function(res, req){
+router.get('/:id', async function(req, res){
     try{
-        const hospitaldat1 = await hospital.findById(req.params.id)
+        const hospitaldat1 = await hospital.findById({_id: req.params.id})
         res.json(hospitaldat1)
     }
     catch(err){
@@ -35,6 +35,13 @@ router.get('/:id', async function(res, req){
 router.post('/hospitalname', async function(req, res){
     const name = req.body.name
     const hospname = await hospital.find({name: req.body.name})
+    res.json(hospname)
+})
+
+// search hospitals by address
+router.post('/searchbyaddress', async function(req, res){
+    const address = req.body.address
+    const hospname = await hospital.find({address: req.body.address})
     res.json(hospname)
 })
 

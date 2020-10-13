@@ -9,8 +9,8 @@ class HandlerGenerator {
     login (req,res) {
         let username = req.body.username;
         let password = req.body.password;
-        let mockedUsername = 'arun';
-        let mockedPassword = 'arunkalagoni';
+        let mockedUsername = "user1";
+        let mockedPassword = "pass@1234";
         console.log(username,password);
         if(username && password) {
             if(username == mockedUsername && password == mockedPassword){

@@ -21,7 +21,7 @@ router.get('/', middleware.checkToken, async(req, res) => {
 })
 
 // get a particular data by using id
-router.get('/:id', middleware.checkToken, async function(res, req){
+router.get('/:id', middleware.checkToken, async function(req, res){
     try{
         const ventilatordat1 = await ventilator.findById(req.params.id)
         res.json(ventilatordat1)
@@ -34,7 +34,7 @@ router.get('/:id', middleware.checkToken, async function(res, req){
 // getting ventilator details using status
 router.post('/searchbystatus', middleware.checkToken, async function(req, res){
     const ventstatus = req.body.status
-    const ventstatusdat1 = await ventilator.find({name: req.body.status})
+    const ventstatusdat1 = await ventilator.find({status: req.body.status})
     res.json(ventstatusdat1)
 })
 
@@ -55,7 +55,7 @@ router.post('/', middleware.checkToken ,async (req, res) => {
 
     })
     try{
-        const a2 = await ventilator.save()
+        const a2 = await ventilators.save()
         res.json(a2)
     }
     catch(err){
@@ -78,7 +78,7 @@ router.delete('/:id', middleware.checkToken, async (req, res) => {
 // updation of data
 router.patch('/:id', middleware.checkToken, async (req, res) => {
     try{
-        const ventilatordat1 = await hospital.updateMany({_id: req.params.id}, {$set: {hid: req.body.hid, ventilatorid: req.body.ventilatorid, status: req.body.status, name: req.body.name}})
+        const ventilatordat1 = await ventilator.updateMany({_id: req.params.id}, {$set: {hid: req.body.hid, ventilatorid: req.body.ventilatorid, status: req.body.status, name: req.body.name}})
         res.json(ventilatordat1)
     }
     catch(err){
